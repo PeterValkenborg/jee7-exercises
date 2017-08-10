@@ -25,6 +25,6 @@ public class PersonPersistenceTest extends AbstractPersistenceTest {
     @Test
     public void personCanBeLoaded(){
     	Person person = em.find(Person.class, 1000L);
-    	assertEquals(person.getLastName(),"Homer");
+    	assertEquals(person.getLastName(),"Doe");
     }
 }
