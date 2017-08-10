@@ -4,9 +4,17 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
+
+import com.realdolmen.candyshop.domain.Person;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
 public class AbstractPersistenceTest {
     private static EntityManagerFactory emf;
@@ -15,24 +23,27 @@ public class AbstractPersistenceTest {
 
     @BeforeClass
     public static void initializeEntityManagerFactory() {
-        // TODO: initialize the EntityManagerFactory
+        emf = Persistence.createEntityManagerFactory("CandyShopPersistenceUnit");
     }
 
     @Before
     public void initializeEntityManagerWithTransaction() {
-        // TODO: initialize the entity manager from the entity manager factory here
-
-        // TODO: begin a transaction
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
     }
 
     @After
     public void rollbackTransactionAndCloseEntityManager() {
-        // TODO: rollback the transaction
-        // TODO: close the entity manager
+        if(em != null) {
+            em.getTransaction().rollback();
+            em.close();
+        }
     }
 
     @AfterClass
     public static void destroyEntityManagerFactory() {
-        // TODO; close the EntityManagerFactory
+        if(emf != null) {
+            emf.close();
+        }
     }
 }

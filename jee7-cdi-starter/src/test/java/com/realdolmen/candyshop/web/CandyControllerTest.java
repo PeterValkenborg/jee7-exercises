@@ -1,6 +1,8 @@
 package com.realdolmen.candyshop.web;
 
 import com.realdolmen.candyshop.AbstractWeldContainerTest;
+import com.realdolmen.candyshop.repositories.CandyRepository;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
